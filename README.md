@@ -17,3 +17,20 @@ El usuario podrá registrar nuevos paquetes, asignarlos a vehículos y consultar
 1. Paquete
 2. Vehiculo
 3. Empleado
+
+## UML 
++------------------+               +-------------------+              +-------------------+
+|     Paquete      |               |     Vehiculo      |              |     Empleado      |
++------------------+               +-------------------+              +-------------------+
+| - destinatario   |               | - placa           |              | - nombre          |
+| - direccion      |               | - modelo          |              | - id              |
+| - peso           |               +-------------------+              +-------------------+
++------------- -------------+      | + getPlaca()      |              | + getNombre()     |
+| + getDestinatario() const |      | + getModelo()     |              | + getId()         |
+| + getDireccion() const    |      | + setPlaca(pl)    |              | + setNombre(nom)  |
+| + getPeso() const         |      | + setModelo(mod)  |              | + setId(i)        |
+| + setDestinatario(dest)   |      | + mostrarInfo()   |              | + mostrarInfo()   |
+| + setDireccion(dir)       |      +-------------------+              +-------------------+
+| + setPeso(p)              |
+| + mostrarInfo() const     |
++---------------------------+
