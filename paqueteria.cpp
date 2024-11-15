@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 
-//Clase paquete
 class Paquete {
 private:
     std::string destinatario;
@@ -12,14 +11,21 @@ public:
     Paquete(std::string dest, std::string dir, double p) 
         : destinatario(dest), direccion(dir), peso(p) {}
 
-    void mostrarInfo() {
+    std::string getDestinatario() const { return destinatario; }
+    std::string getDireccion() const { return direccion; }
+    double getPeso() const { return peso; }
+
+    void setDestinatario(const std::string& dest) { destinatario = dest; }
+    void setDireccion(const std::string& dir) { direccion = dir; }
+    void setPeso(double p) { peso = p; }
+
+    void mostrarInfo() const {
         std::cout << "Destinatario: " << destinatario << std::endl;
-        std::cout << "Direccion: " << direccion << std::endl;
+        std::cout << "Dirección: " << direccion << std::endl;
         std::cout << "Peso: " << peso << " kg" << std::endl;
     }
 };
 
-//Clase vehículo
 class Vehiculo {
 private:
     std::string placa;
@@ -28,13 +34,18 @@ private:
 public:
     Vehiculo(std::string pl, std::string mod) : placa(pl), modelo(mod) {}
 
-    void mostrarInfo() {
+    std::string getPlaca() const { return placa; }
+    std::string getModelo() const { return modelo; }
+
+    void setPlaca(const std::string& pl) { placa = pl; }
+    void setModelo(const std::string& mod) { modelo = mod; }
+
+    void mostrarInfo() const {
         std::cout << "Placa: " << placa << std::endl;
         std::cout << "Modelo: " << modelo << std::endl;
     }
 };
 
-//Clase empleado
 class Empleado {
 private:
     std::string nombre;
@@ -43,7 +54,13 @@ private:
 public:
     Empleado(std::string nom, int i) : nombre(nom), id(i) {}
 
-    void mostrarInfo() {
+    std::string getNombre() const { return nombre; }
+    int getId() const { return id; }
+
+    void setNombre(const std::string& nom) { nombre = nom; }
+    void setId(int i) { id = i; }
+
+    void mostrarInfo() const {
         std::cout << "Nombre: " << nombre << std::endl;
         std::cout << "ID: " << id << std::endl;
     }
@@ -56,7 +73,7 @@ int main() {
 
     std::cout << "Ingrese el destinatario del paquete: ";
     std::getline(std::cin, destinatario);
-    std::cout << "Ingrese la direccion del paquete: ";
+    std::cout << "Ingrese la dirección del paquete: ";
     std::getline(std::cin, direccion);
     std::cout << "Ingrese el peso del paquete (kg): ";
     std::cin >> peso;
@@ -68,9 +85,9 @@ int main() {
     std::string placa;
     std::string modelo;
 
-    std::cout << "Ingrese la placa del vehiculo: ";
+    std::cout << "Ingrese la placa del vehículo: ";
     std::getline(std::cin, placa);
-    std::cout << "Ingrese el modelo del vehiculo: ";
+    std::cout << "Ingrese el modelo del vehículo: ";
     std::getline(std::cin, modelo);
 
     Vehiculo vehiculo1(placa, modelo);
@@ -85,11 +102,11 @@ int main() {
 
     Empleado empleado1(nombre, id);
 
-    std::cout << "\nInformacion del Paquete:\n";
+    std::cout << "\nInformación del Paquete:\n";
     paquete1.mostrarInfo();
-    std::cout << "\nInformacion del Vehiculo:\n";
+    std::cout << "\nInformación del Vehículo:\n";
     vehiculo1.mostrarInfo();
-    std::cout << "\nInformacion del Empleado:\n";
+    std::cout << "\nInformación del Empleado:\n";
     empleado1.mostrarInfo();
 
     return 0;
