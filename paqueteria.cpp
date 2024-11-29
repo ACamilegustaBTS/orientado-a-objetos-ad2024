@@ -8,12 +8,10 @@ protected:
     int id;              // ID del empleado
 
 public:
-    // Constructor que inicializa el nombre y el ID del empleado
     Empleado(std::string nom, int i) : nombre(nom), id(i) {}
 
-    // Método para mostrar la información del empleado
     virtual void mostrarInfo() const {
-        std::cout << "Empleado: " << nombre << ", ID: " << id << std::endl;
+        std::cout << "Empleado: " << nombre << "\nID: " << id << std::endl;
     }
 };
 
@@ -23,12 +21,10 @@ private:
     std::string licencia;  // Licencia del chofer
 
 public:
-    // Constructor que inicializa el nombre, ID y licencia del chofer
     Chofer(std::string nom, int i, std::string lic) : Empleado(nom, i), licencia(lic) {}
 
-    // Método para mostrar la información del chofer
     void mostrarInfo() const override {
-        Empleado::mostrarInfo();  // Llama al método de la clase base
+        Empleado::mostrarInfo();
         std::cout << "Licencia: " << licencia << std::endl;
     }
 };
@@ -41,14 +37,13 @@ private:
     double peso;               // Peso del paquete
 
 public:
-    // Constructor que inicializa el destinatario, dirección y peso
     Paquete(std::string dest, std::string dir, double p) 
         : destinatario(dest), direccion(dir), peso(p) {}
 
-    // Método para mostrar la información del paquete
     void mostrarInfo() const {
-        std::cout << "Destinatario: " << destinatario << ", Dirección: " << direccion 
-                  << ", Peso: " << peso << " kg" << std::endl;
+        std::cout << "Destinatario: " << destinatario 
+                  << "\nDirección: " << direccion 
+                  << "\nPeso: " << peso << " kg" << std::endl;
     }
 };
 
@@ -59,12 +54,11 @@ private:
     std::string modelo;  // Modelo del vehículo
 
 public:
-    // Constructor que inicializa la placa y el modelo del vehículo
     Vehiculo(std::string pl, std::string mod) : placa(pl), modelo(mod) {}
 
-    // Método para mostrar la información del vehículo
     void mostrarInfo() const {
-        std::cout << "Placa: " << placa << ", Modelo: " << modelo << std::endl;
+        std::cout << "Placa: " << placa 
+                  << "\nModelo: " << modelo << std::endl;
     }
 };
 
@@ -76,21 +70,25 @@ private:
     Vehiculo* vehiculo;    // Agregación
 
 public:
-    // Constructor de la empresa que recibe el paquete, el vehículo y el empleado
     EmpresaPaqueteria(std::string dest, std::string dir, double p, Vehiculo* v, Empleado* emp)
         : paquete(dest, dir, p), vehiculo(v), empleado(emp) {}
 
-    // Método para mostrar la información de todos los objetos asociados
     void mostrarInfo() const {
-        paquete.mostrarInfo();  // Muestra la información del paquete
-        vehiculo->mostrarInfo(); // Muestra la información del vehículo
+        std::cout << "\n=== Información del Paquete ===\n";
+        paquete.mostrarInfo();
+
+        std::cout << "\n=== Información del Vehículo ===\n";
+        vehiculo->mostrarInfo();
+
+        std::cout << "\n=== Información del Empleado ===\n";
         if (empleado) {
-            empleado->mostrarInfo(); // Muestra la información del empleado si existe
+            empleado->mostrarInfo();
+        } else {
+            std::cout << "No hay empleado asignado.\n";
         }
     }
 };
 
-// Función principal que ejecuta el programa
 int main() {
     // Variables para almacenar los datos ingresados por el usuario
     std::string destinatario, direccion, placa, modelo, nombre, licencia;
@@ -98,21 +96,31 @@ int main() {
     double peso;
 
     // Solicitar datos del paquete
+    std::cout << "=== Registro de Paquete ===\n";
     std::cout << "Ingrese el destinatario del paquete: ";
     std::getline(std::cin, destinatario);
     std::cout << "Ingrese la dirección del paquete: ";
     std::getline(std::cin, direccion);
-    std::cout << "Ingrese el peso del paquete (kg): ";
-    std::cin >> peso;
+
+    // Validar que el peso sea mayor a 0
+    do {
+        std::cout << "Ingrese el peso del paquete (kg): ";
+        std::cin >> peso;
+        if (peso <= 0) {
+            std::cout << "Error: El peso debe ser mayor a 0. Por favor, ingrese un valor válido.\n";
+        }
+    } while (peso <= 0);
     std::cin.ignore(); 
 
     // Solicitar datos del vehículo
+    std::cout << "\n=== Registro de Vehículo ===\n";
     std::cout << "Ingrese la placa del vehículo: ";
     std::getline(std::cin, placa);
     std::cout << "Ingrese el modelo del vehículo: ";
     std::getline(std::cin, modelo);
 
     // Solicitar datos del chofer
+    std::cout << "\n=== Registro del Chofer ===\n";
     std::cout << "Ingrese el nombre del chofer: ";
     std::getline(std::cin, nombre);
     std::cout << "Ingrese el ID del chofer: ";
@@ -129,8 +137,9 @@ int main() {
     EmpresaPaqueteria empresa1(destinatario, direccion, peso, &vehiculo1, &chofer1);
 
     // Mostrar la información completa
-    std::cout << "\nInformación del Paquete, Vehículo y Empleado:\n";
+    std::cout << "\n=== Información Completa ===\n";
     empresa1.mostrarInfo();
 
     return 0;
 }
+
