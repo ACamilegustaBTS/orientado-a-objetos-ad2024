@@ -25,8 +25,7 @@ Se modificó el UML a un formato más sencillo y fácil de comprender. Ahora se 
 ### Avance 3
 Se agregó todo lo que hacía falta al código, completando la funcionalidad del sistema de paquetería.
 **Retroalimentación:**
-Se explicó de mejor forma el README, se documentó y detalló el código para evitar confusiones. Además, se añadieron comentarios que facilitan la comprensión del código y su estructura.
-
+Se explicó de mejor forma el README, se documentó y detalló el código para evitar confusiones. 
 ### Entrega final
 Con la entrega final, se mejoraron las líneas de código, simplificando y limpiando su estructura para que fuera más fácil de entender.
 Se implementó el manejo de errores utilizando excepciones para garantizar que el programa maneje entradas incorrectas de manera adecuada, evitando que el programa termine inesperadamente.
